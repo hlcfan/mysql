@@ -1116,10 +1116,12 @@ func (stmt *mysqlStmt) writeExecutePacket(args []driver.Value) error {
 				if v.IsZero() {
 					b = append(b, "0000-00-00"...)
 				} else {
+					fmt.Printf("===V: %#v\n", v.In(mc.cfg.Loc).String())
 					b, err = appendDateTime(b, v.In(mc.cfg.Loc))
 					if err != nil {
 						return err
 					}
+					fmt.Printf("===b: %#v\n", string(b))
 				}
 
 				paramValues = appendLengthEncodedInteger(paramValues,
